@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Category;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -16,8 +17,15 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
+        $category_ids = Category::all()->pluck('id')->all();
         return [
-            //
+          'title' => rand(0, 5),
+          'picture' => null ,
+          'summary' => null ,
+          'description' => fake()->words(rand(15, 80), true),
+          'price' => rand(0, 400),
+
+          'category_id' => fake()->randomElement($category_ids),
         ];
     }
 }

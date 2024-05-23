@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone', 20)->nullable();
-            // $table->string('role')->nullable(); //RUOLO DA CAPIRE COME FUNZIONA
+            $table->string('role'); //RUOLO DA CAPIRE COME FUNZIONA
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
