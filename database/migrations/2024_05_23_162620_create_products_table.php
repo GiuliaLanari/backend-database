@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->string('picture')->nullable();
-            $table->string('summary')->nullable();// cosa si intende?? 
+            $table->string('summary')->nullable();
             $table->text('description');
             $table->mediumInteger('price')->unsigned();
             $table->timestamps();

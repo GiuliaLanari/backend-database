@@ -19,6 +19,7 @@ class UserSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'Amministratore',
+            'surname'=>'Rossi',
             'email' => 'asdf@asdf.asdf',
             'role' => 'Amministatore',
             'phone'=> '46387402804',
@@ -26,6 +27,7 @@ class UserSeeder extends Seeder
 
         User::factory()->create([
             'name' => 'cliente',
+            'surname'=>'Bianchi',
             'email' => 'cliente@asd.asd',
             'role' => 'cliente',
             'phone'=> '264294232342',

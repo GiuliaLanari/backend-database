@@ -19,7 +19,7 @@ class ProductFactory extends Factory
     {
         $category_ids = Category::all()->pluck('id')->all();
         return [
-          'title' => rand(0, 5),
+          'title' =>fake()->words(rand(1,10), true),
           'picture' => null ,
           'summary' => null ,
           'description' => fake()->words(rand(15, 80), true),
@@ -27,5 +27,6 @@ class ProductFactory extends Factory
 
           'category_id' => fake()->randomElement($category_ids),
         ];
+        
     }
 }
