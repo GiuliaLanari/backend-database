@@ -13,7 +13,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 
-Route::name('api.v1.')
+Route::name('api.')
     ->prefix('v1')
     ->group(function () {
     ////////////////// ROUTE PRODUCT /////////////////////

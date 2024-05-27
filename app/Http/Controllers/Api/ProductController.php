@@ -14,10 +14,7 @@ class ProductController extends Controller
     {
         $products = Product::with('category')->get();
         return $products;
-        // $products = Product::all();
-        // // mi permette di visualizzare tutti i prodotti
-        // //COME POSSO ESPANDERE CATEGORY
-        // return $products;
+       
     }
 
     public function show($id)
