@@ -22,7 +22,7 @@ Route::name('api.')
 
 
         Route::get('/products/add',     [ProductController::class, 'add'])->name('products.add');
-        Route::put('/products/{id}',  [ProductController::class, 'update'])->name('products.edit');
+        Route::put('/products/{id}/edit',  [ProductController::class, 'update'])->name('products.edit');
         Route::delete('/products/{id}',    [ProductController::class, 'delete'])->name('products.delete');
 
 
