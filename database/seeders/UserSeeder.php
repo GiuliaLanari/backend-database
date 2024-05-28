@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
             'name' => 'Amministratore',
             'surname'=>'Rossi',
             'email' => 'asdf@asdf.asdf',
-            'role' => 'Amministatore',
+            'role' => 'admin',
             'phone'=> '46387402804',
         ]);
 
@@ -29,7 +29,7 @@ class UserSeeder extends Seeder
             'name' => 'cliente',
             'surname'=>'Bianchi',
             'email' => 'cliente@asd.asd',
-            'role' => 'cliente',
+            'role' => 'client',
             'phone'=> '264294232342',
         ]);
     }
