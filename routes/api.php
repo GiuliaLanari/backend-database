@@ -26,7 +26,8 @@ Route::name('api.v1')//va a scrivere nella prima parte del name->route
         Route::put('/products/{id}/edit',  [ProductController::class, 'edit'])->name('products.edit');//ADMIN
         Route::delete('/products/{id}',    [ProductController::class, 'delete'])->name('products.delete');//ADMIN
 
-///////// FINO QUI TUTTO CORRETTO ////////
+///////// ROUTE PRODUCT FATTE ✔ ////////
+
 //////////////////// ROUTE ORDER /////////////////////
 
         Route::get('/orders',            [OrderController::class, 'index'])->name('orders.index'); //http://127.0.0.1:8000/api/v1/orders
@@ -50,7 +51,7 @@ Route::name('api.v1')//va a scrivere nella prima parte del name->route
 //////////////////// ROUTE REVIEW /////////////////////
 
         Route::get('/reviews',            [ReviewController::class, 'index'])->name('reviews.index');//TUTTI
-        Route::get('/reviews/add',       [ReviewController::class, 'add'])->name('reviews.add');//CLIENT
+        Route::get('/reviews/add',       [ReviewController::class, 'add'])->name('reviews.add');//CLIENT --in sospeso--
         Route::delete('/reviews/{id}',    [ReviewController::class, 'delete'])->name('reviews.delete');//CLIENT
 
 //////////////////// ROUTE TYPE USER /////////////////////
