@@ -14,7 +14,7 @@ class ReviewController extends Controller
     public function index()
     {
         $reviews = Review::with('user', 'product')->get();
-        //come faccio a recuperare l'utente e il prodotto?
+        
         return $reviews;
     }
 
