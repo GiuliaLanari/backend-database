@@ -40,10 +40,15 @@ class CartController extends Controller
 
 
  
-    public function buy(Cart $cart)
-    {
-        //
-    }
+    // public function buy(Cart $cart)
+    // {
+    //     if(Auth::user()->role !== "client") abort(404);
+
+    //     $cart_id=Cart::where('user_id', Auth::id())->get();
+    //     $cart->orders()->attach();
+
+    //     return response()->noContent();
+    // }
 
     public function delete($id)
     {

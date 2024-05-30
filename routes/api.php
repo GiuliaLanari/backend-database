@@ -42,10 +42,10 @@ Route::name('api.v1.')//va a scrivere nella prima parte del name->route
 
         Route::get('/cart',            [CartController::class, 'index'])->name('cart.index');//CLIENT
         Route::delete('/carts/{id}',   [CartController::class, 'delete'])->name('carts.delete'); //CLIENT
-
-
         Route::post('/carts/{product}/add',       [CartController::class, 'add'])->name('carts.add'); //CLIENT
-        Route::get('/carts/',          [CartController::class, 'buy'])->name('carts.buy');//CLIENT
+
+
+        Route::get('/buy-carts/',          [CartController::class, 'buy'])->name('carts.buy');//CLIENT
 
 //////////////////// ROUTE REVIEW /////////////////////
 
