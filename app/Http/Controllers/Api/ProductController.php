@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    // $admin= Auth::user()->id;
+    
     
     public function index()
     {
@@ -34,7 +34,8 @@ class ProductController extends Controller
 
     public function add (Request $request)
     {
-        // if(Auth::user()->role !== "admin") abort(404);
+        if(Auth::user()->role !== "admin") abort(404);
+
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'picture' => ['nullable', 'string'],
@@ -63,7 +64,7 @@ class ProductController extends Controller
     public function edit(Request $request, $id)
     {
 
-        // if(Auth::user()->role !== "admin") abort(404);
+        if(Auth::user()->role !== "admin") abort(404);
 
         $request->validate([
             'title' => ['required', 'string', 'max:255'],
@@ -97,7 +98,7 @@ class ProductController extends Controller
     public function delete($id)
     
     {
-        // if(Auth::user()->role !== "admin") abort(404);
+        if(Auth::user()->role !== "admin") abort(404);
 
         $product = Product::find($id);
 

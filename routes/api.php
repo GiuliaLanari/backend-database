@@ -13,7 +13,7 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 
-Route::name('api.v1')//va a scrivere nella prima parte del name->route
+Route::name('api.v1.')//va a scrivere nella prima parte del name->route
     ->prefix('v1')//va a inserirsi nel link del  sito
 //     ->middleware(['auth:sanctum']) 
     ->group(function () {
@@ -30,33 +30,28 @@ Route::name('api.v1')//va a scrivere nella prima parte del name->route
 
 //////////////////// ROUTE ORDER /////////////////////
 
-        Route::get('/orders',            [OrderController::class, 'index'])->name('orders.index'); //http://127.0.0.1:8000/api/v1/orders
-        Route::get('/orders/{order}',     [OrderController::class, 'show'])->name('orders.show');
+        Route::get('/orders',            [OrderController::class, 'index'])->name('orders.index');//ADMIN-CLIENT //http://127.0.0.1:8000/api/v1/orders
 
-        Route::get('/orders/confirm',     [OrderController::class, 'confirm'])->name('orders.confirm');//ADMIN
-        Route::delete('/products/{id}',    [ProductController::class, 'delete'])->name('products.delete');//ADMIN
+        Route::get('/orders/{order}',     [OrderController::class, 'show'])->name('orders.show');//ADMIN
+        Route::delete('/orders/{id}',    [OrderController::class, 'delete'])->name('orders.delete');//ADMIN
 
-
+        // Route::get('/orders/confirm',     [OrderController::class, 'confirm'])->name('orders.confirm');//ADMIN
 
 
 //////////////////// ROUTE CART /////////////////////
 
-        Route::get('/cart',            [CartController::class, 'index'])->name('cart');//CLIENT
-
-        Route::get('/carts/add',       [CartController::class, 'add'])->name('carts.add'); //CLIENT
-
+        Route::get('/cart',            [CartController::class, 'index'])->name('cart.index');//CLIENT
         Route::delete('/carts/{id}',   [CartController::class, 'delete'])->name('carts.delete'); //CLIENT
+
+
+        Route::post('/carts/{product}/add',       [CartController::class, 'add'])->name('carts.add'); //CLIENT
         Route::get('/carts/',          [CartController::class, 'buy'])->name('carts.buy');//CLIENT
 
 //////////////////// ROUTE REVIEW /////////////////////
 
         Route::get('/reviews',            [ReviewController::class, 'index'])->name('reviews.index');//TUTTI
-        Route::get('/reviews/add',       [ReviewController::class, 'add'])->name('reviews.add');//CLIENT --in sospeso--
+        Route::post('/reviews/{id}/add',       [ReviewController::class, 'add'])->name('reviews.add');//CLIENT 
         Route::delete('/reviews/{id}',    [ReviewController::class, 'delete'])->name('reviews.delete');//CLIENT
 
-//////////////////// ROUTE TYPE USER /////////////////////
-
-//         Route::get('/role', [AdminController::class, 'role'])->name('admin.role');
-//         Route::get('/role', [ClientController::class, 'role'])->name('client.role');
-
+//FATTO ✔//
     });

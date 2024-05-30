@@ -3,27 +3,41 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Cart;
+use App\Models\Product;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCartRequest;
-use App\Http\Requests\UpdateCartRequest;
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        $cart = Cart::all();
-        // voglio vedere solo il carello del cliente logato
-        
-        return $cart;
+        if(Auth::user()->role !== "client") abort(404);
+
+        if(Auth::user()->role === "client") {
+            $cart = Cart::with('user','products')->where('user_id', Auth::id())->get();
+
+        }
+
+        return [
+            'data' => $cart
+        ];
     }
 
-    public function add()
+
+
+    public function add(Product $product)
     {
-        // 
+      
+        if(Auth::user()->role !== "client") abort(404);
+
+        $cart_id=Cart::where('user_id', Auth::id())->get();
+        $product->carts()->attach($cart_id, ['quantity'=> 1]);
+
+        return response()->noContent();
+        
     }
+
 
  
     public function buy(Cart $cart)
@@ -31,8 +45,21 @@ class CartController extends Controller
         //
     }
 
-    public function delete(Cart $cart)
+    public function delete($id)
     {
-        //
+        if(Auth::user()->role !== "client") abort(404);
+
+        $cart = Cart::find($id);
+
+        if (!$cart) {
+            return response()->json(['message' => 'Not found'], 404);
+        }
+
+       
+        $cart->products()->detach();
+        
+        $cart->delete();
+
+        return response()->json(['message' => 'Element deleted successfully'], 200);  
     }
 }
