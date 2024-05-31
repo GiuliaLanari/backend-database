@@ -71,6 +71,8 @@ class ProductController extends Controller
             'picture' => ['nullable', 'string'],
             'description' => ['required', 'string'],
             'price' => ['required', 'numeric'], 
+            // 'category_id' => ['required'], 
+             
             
         ]);
 
