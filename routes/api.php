@@ -1,12 +1,13 @@
 <?php
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CartController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\ProductController;
-
+use App\Http\Controllers\Api\CategoryController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -15,16 +16,15 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::name('api.v1.')//va a scrivere nella prima parte del name->route
     ->prefix('v1')//va a inserirsi nel link del  sito
-    ->middleware(['auth:sanctum']) 
+    ->middleware(['auth:sanctum'])
     ->group(function () {
     ////////////////// ROUTE PRODUCT /////////////////////
     //FATTO ✔//
-        Route::get('/products',            [ProductController::class, 'index'])->name('products.index');// http://127.0.0.1:8000/api/v1/products
-        Route::get('/products/{product}',  [ProductController::class, 'show'])->name('products.show');//http://127.0.0.1:8000/api/v1/products/id
+      
 
 
         Route::post('/products/add',     [ProductController::class, 'add'])->name('products.add');//ADMIN
-        Route::put('/products/{id}/edit',  [ProductController::class, 'edit'])->name('products.edit');//ADMIN
+        Route::post('/products/{id}/edit',  [ProductController::class, 'edit'])->name('products.edit');//ADMIN
         Route::delete('/products/{id}',    [ProductController::class, 'delete'])->name('products.delete');//ADMIN
 
 
@@ -50,9 +50,25 @@ Route::name('api.v1.')//va a scrivere nella prima parte del name->route
 
 //////////////////// ROUTE REVIEW /////////////////////
 //FATTO ✔//
-        Route::get('/reviews',            [ReviewController::class, 'index'])->name('reviews.index');//TUTTI
+       
         Route::post('/reviews/{id}/add',       [ReviewController::class, 'add'])->name('reviews.add');//CLIENT 
         Route::delete('/reviews/{id}',    [ReviewController::class, 'delete'])->name('reviews.delete');//CLIENT
 
 
+//////////////////// ROUTE CATEGORY /////////////////////
+
+Route::get('/category',       [CategoryController::class, 'list'])->name('categories.list');//ADMIN
+
+
+    });
+
+   
+
+    Route::name('api.v1.')
+    ->prefix('v1')
+    ->group(function () {
+        Route::get('/products',            [ProductController::class, 'index'])->name('products.index');// http://127.0.0.1:8000/api/v1/products
+        Route::get('/products/{product}',  [ProductController::class, 'show'])->name('products.show');//http://127.0.0.1:8000/api/v1/products/id
+
+        Route::get('/reviews',            [ReviewController::class, 'index'])->name('reviews.index');//TUTTI
     });
