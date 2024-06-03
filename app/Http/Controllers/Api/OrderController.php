@@ -51,10 +51,7 @@ class OrderController extends Controller
         ];
     }
     
-    // public function confirm()
-    // {
-    //  //
-    // }
+
 
    
     public function delete($id)
