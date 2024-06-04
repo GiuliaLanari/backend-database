@@ -34,6 +34,7 @@ Route::name('api.v1.')//va a scrivere nella prima parte del name->route
         Route::get('/orders',            [OrderController::class, 'index'])->name('orders.index');//ADMIN-CLIENT //http://127.0.0.1:8000/api/v1/orders
 
         Route::get('/orders/{order}',     [OrderController::class, 'show'])->name('orders.show');//ADMIN
+
         Route::delete('/orders/{id}',    [OrderController::class, 'delete'])->name('orders.delete');//ADMIN
 
         // Route::get('/orders/confirm',     [OrderController::class, 'confirm'])->name('orders.confirm');//ADMIN --vedere se add o no--

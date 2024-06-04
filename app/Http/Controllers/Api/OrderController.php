@@ -44,7 +44,7 @@ class OrderController extends Controller
             return response(['message' => 'Not found'], 404);
         }
 
-        if($order->user_id !== Auth::user()->id)abort(404);
+        // if($order->user_id !== Auth::user()->id)abort(404);
 
         return [
             'data' => $order
