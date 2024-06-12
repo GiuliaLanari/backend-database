@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Review;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreProductRequest;
@@ -25,7 +26,8 @@ class ProductController extends Controller
 
     public function show($id)
     {
-        $product = Product::with('category')->find($id);
+        $product = Product::with('category', 'reviews', 'reviews.user')->find($id);
+       
         if (!$product) {
             return response(['message' => 'Not found'], 404);
         }
