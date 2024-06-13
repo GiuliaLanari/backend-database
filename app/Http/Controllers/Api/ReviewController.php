@@ -14,9 +14,24 @@ class ReviewController extends Controller
    
     public function index()
     {
+          
+    if (auth()->check()) {
+      
+        if (auth()->user()->role === 'client') {
+           
+            $reviews = Review::with('user', 'product')
+                ->where('user_id', auth()->id())
+                ->get();
+        } else {
+           
+            $reviews = Review::with('user', 'product')->get();
+        }
+    } else {
+    
         $reviews = Review::with('user', 'product')->get();
-        
-        return $reviews;
+    }
+
+    return $reviews;
     }
 
     
