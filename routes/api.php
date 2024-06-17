@@ -8,16 +8,24 @@ use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Auth\NewPasswordController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
 });
 
 
+
 Route::name('api.v1.')//va a scrivere nella prima parte del name->route
     ->prefix('v1')//va a inserirsi nel link del  sito
     ->middleware(['auth:sanctum'])
     ->group(function () {
+
+   ////////////////// ROUTE CHANGE PASSWORD /////////////////////
+    //FATTO ✔//
+       Route::post('/change-password', [NewPasswordController::class, 'changePassword'])->name('change.password');
+
+
     ////////////////// ROUTE PRODUCT /////////////////////
     //FATTO ✔//
       
@@ -37,7 +45,7 @@ Route::name('api.v1.')//va a scrivere nella prima parte del name->route
 
         Route::delete('/orders/{id}',    [OrderController::class, 'delete'])->name('orders.delete');//ADMIN
 
-        // Route::get('/orders/confirm',     [OrderController::class, 'confirm'])->name('orders.confirm');//ADMIN --vedere se add o no--
+
 
 
 //////////////////// ROUTE CART /////////////////////

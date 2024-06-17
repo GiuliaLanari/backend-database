@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rules;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Support\Facades\Auth;//PROVA
 
 class NewPasswordController extends Controller
 {
@@ -50,4 +51,32 @@ class NewPasswordController extends Controller
 
         return response()->json(['status' => __($status)]);
     }
+
+
+
+
+
+public function changePassword(Request $request)
+{
+    $request->validate([
+        'current_password' => 'required',
+        'new_password' => 'required|min:8|confirmed',
+    ]);
+
+    $user = Auth::user();
+
+    if (!Hash::check($request->current_password, $user->password)) {
+        throw ValidationException::withMessages([
+            'current_password' => ['The current password is incorrect.'],
+        ]);
+    }
+
+    $user->password = Hash::make($request->new_password);
+    $user->save();
+
+    return response()->json(['message' => 'Password changed successfully.']);
+}
+
+
+
 }
