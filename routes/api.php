@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Auth\NewPasswordController;
+use App\Http\Controllers\Api\EmailController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -80,4 +81,8 @@ Route::get('/category',       [CategoryController::class, 'list'])->name('catego
         Route::get('/products/{product}',  [ProductController::class, 'show'])->name('products.show');//http://127.0.0.1:8000/api/v1/products/id
 
         Route::get('/reviews',            [ReviewController::class, 'index'])->name('reviews.index');//TUTTI
+
+// PTROVAAAAAA
+
+        Route::post('/send-email', [EmailController::class, 'sendEmail']);
     });
