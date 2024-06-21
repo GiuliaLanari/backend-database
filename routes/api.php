@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Api\EmailController;
+use App\Http\Controllers\Api\UserController;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -25,6 +26,13 @@ Route::name('api.v1.')//va a scrivere nella prima parte del name->route
    ////////////////// ROUTE CHANGE PASSWORD /////////////////////
     //FATTO ✔//
        Route::post('/change-password', [NewPasswordController::class, 'changePassword'])->name('change.password');
+ 
+       ////////////////// ROUTE CHANGE EMAIL /////////////////////
+    //FATTO ✔//
+    Route::put('/update-email', [UserController::class, 'updateEmail'])->name('update.email');
+       ////////////////// ROUTE CHANGE NAME AND SURNAME /////////////////////
+    //FATTO ✔//
+    Route::put('/update-profile', [UserController::class, 'updateProfile'])->name('update.profile');
 
 
     ////////////////// ROUTE PRODUCT /////////////////////
