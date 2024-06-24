@@ -4,15 +4,17 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\CartController;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\EmailController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ReviewController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Auth\NewPasswordController;
-use App\Http\Controllers\Api\EmailController;
-use App\Http\Controllers\Api\UserController;
-// use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
+
+
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
     return $request->user();
@@ -37,35 +39,8 @@ Route::name('api.v1.')//va a scrivere nella prima parte del name->route
     //FATTO ✔//
     Route::put('/update-profile', [UserController::class, 'updateProfile'])->name('update.profile');
 
-   ////////////////// ROUTE verification email  /////////////////////
-//    TO DOOOOO Proveeee //
-    
-//     Route::get('/email-verify', [VerifyEmailController::class, 'verify'])->name('verification.verify');
 
-// Route::get('/email-verify', function () {
-//         return view('auth.verify-email');
-//     })->name('verification.notice');
 
-     
-// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-//         $request->fulfill();
-     
-//         return redirect('/');
-//     })->name('verification.verify');
-    
-// Route::post('email/verification-notification', 'Auth\VerificationController@sendVerificationEmail');
-// Route::get('email/verify/{id}/{hash}', 'Auth\VerificationController@verify')->name('verification.verify');
-
- Route::post('/email/verification-notification', function (Request $request) {
-        $request->user()->sendEmailVerificationNotification();
-        return response()->json(['message' => 'Verification link sent!']);
-    });
-
-    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        $request->fulfill();
-        return response()->json(['message' => 'Email verified successfully!']);
-    })->name('verification.verify');
- 
 
     ////////////////// ROUTE PRODUCT /////////////////////
     //FATTO ✔//
@@ -122,7 +97,26 @@ Route::get('/category',       [CategoryController::class, 'list'])->name('catego
 
         Route::get('/reviews',            [ReviewController::class, 'index'])->name('reviews.index');//TUTTI
 
-// PTROVAAAAAA
 
         Route::post('/send-email', [EmailController::class, 'sendEmail']);
+
+////////////////// ROUTE verification email  /////////////////////
+//    TO DOOOOO Proveeee //
+    
+        Route::post('/email/verification-notification', function (Request $request) {
+            $request->user()->sendEmailVerificationNotification();
+            return response()->json(['message' => 'Verification link sent!']);
+        });
+        
+
+
+        Route::get('/verify-email/{id}/{hash}', function (EmailVerificationRequest $request, $id, $hash) {
+error_log('ciao');
+            $request->fulfill();
+            // dd($request);
+            return response()->json(['redirect_url' => config('app.frontend_url')."/verify-email/$id/$hash" ]);
+        })->withoutMiddleware('auth')->name('verification.verify');
+       
+
+     
     });

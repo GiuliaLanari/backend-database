@@ -16,12 +16,13 @@ class VerifyEmailController extends Controller
     /**
      * Mark the authenticated user's email address as verified.
      */
-    public function __invoke(EmailVerificationRequest $request): RedirectResponse
+
+    public function __invoke(EmailVerificationRequest $request, $id, $hash): RedirectResponse
     {
         if ($request->user()->hasVerifiedEmail()) {
             return redirect()->intended(
-                config('app.frontend_url').'/email-verify'
-            );
+                config('app.frontend_url').`/email-verify/$id/$hash`
+            )->with('message', 'Email already verified'); 
         }
 
         if ($request->user()->markEmailAsVerified()) {
@@ -29,24 +30,10 @@ class VerifyEmailController extends Controller
         }
 
         return redirect()->intended(
-            config('app.frontend_url').'/email-verify'
-        );
+            config('app.frontend_url').`/email-verify/$id/$hash`
+        )->with('message', 'Email verified successfully!'); 
     }
 
-    // public function __invoke(Request $request): array
-    // {
-    //     $user = $request->user();
-
-    //     if ($user->hasVerifiedEmail()) {
-    //         return ['message' => 'already_verified'];
-    //     }
-
-    //     if ($user->markEmailAsVerified()) {
-    //         event(new Verified($user));
-    //         return ['message' => 'verified'];
-    //     }
-
-    //     return ['message' => 'verification_failed'];
-    // }
-
 }
+
+    
