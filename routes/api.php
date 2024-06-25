@@ -13,6 +13,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 
@@ -112,12 +113,7 @@ Route::get('/category',       [CategoryController::class, 'list'])->name('catego
         
 
 
-        Route::get('/verify-email/{id}/{hash}', function (EmailVerificationRequest $request, $id, $hash) {
-
-            $request->fulfill();
-            
-            return response()->json(['redirect_url' => config('app.frontend_url')."/verify-email/$id/$hash" ]);
-        })->withoutMiddleware('auth')->name('verification.verify');
+        Route::get('/verify-email/{id}/{hash}',VerifyEmailController:: class);
        
 
         ///// FORGOT/RESET PASSWORD ///////
@@ -126,4 +122,5 @@ Route::get('/category',       [CategoryController::class, 'list'])->name('catego
         ////Reset- To DOOO////
         Route::post('reset-password', [ResetPasswordController::class, 'reset']);
      
+        
     });

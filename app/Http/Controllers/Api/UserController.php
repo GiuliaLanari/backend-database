@@ -13,8 +13,10 @@ use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {
+    
     public function updateEmail(Request $request)
     {
+        
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:users,email',
         ]);
