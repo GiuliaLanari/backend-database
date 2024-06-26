@@ -84,7 +84,7 @@ Route::name('api.v1.')//va a scrivere nella prima parte del name->route
 
 
 //////////////////// ROUTE CATEGORY /////////////////////
-
+//FATTO ✔//
 Route::get('/category',       [CategoryController::class, 'list'])->name('categories.list');//ADMIN
 
 
@@ -104,23 +104,22 @@ Route::get('/category',       [CategoryController::class, 'list'])->name('catego
         Route::post('/send-email', [EmailController::class, 'sendEmail']);
 
 ////////////////// ROUTE verification email  /////////////////////
-//    TO DOOOOO Proveeee //
+//FATTO ✔//
     
         Route::post('/email/verification-notification', function (Request $request) {
             $request->user()->sendEmailVerificationNotification();
             return response()->json(['message' => 'Verification link sent!']);
         });
         
-
-
         Route::get('/verify-email/{id}/{hash}',VerifyEmailController:: class);
        
 
-        ///// FORGOT/RESET PASSWORD ///////
+        ///// FORGOT PASSWORD ///////
+
         Route::post('forgot-password',[ForgotPasswordController::class, 'sendResetLinkEmail']);
 
         ////Reset- To DOOO////
-        Route::post('reset-password', [ResetPasswordController::class, 'reset']);
+        Route::post('password-reset', [ResetPasswordController::class, 'reset']);
      
         
     });
