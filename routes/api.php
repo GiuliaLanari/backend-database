@@ -114,11 +114,11 @@ Route::get('/category',       [CategoryController::class, 'list'])->name('catego
         Route::get('/verify-email/{id}/{hash}',VerifyEmailController:: class);
        
 
-        ///// FORGOT PASSWORD ///////
+///// FORGOT PASSWORD ///////
+//FATTO ✔//
 
         Route::post('forgot-password',[ForgotPasswordController::class, 'sendResetLinkEmail']);
 
-        ////Reset- To DOOO////
         Route::post('password-reset', [ResetPasswordController::class, 'reset']);
      
         
